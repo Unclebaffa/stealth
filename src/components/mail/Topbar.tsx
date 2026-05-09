@@ -100,7 +100,7 @@ export function Topbar({ onOpenPalette, onOpenSettings, onShowToast }: TopbarPro
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -8, scale: 0.96 }}
                   transition={{ type: "spring", stiffness: 300, damping: 28 }}
-                  className="glass-strong absolute right-0 top-full z-50 mt-2 w-56 overflow-hidden rounded-xl p-2"
+                  className="glass-modal absolute right-0 top-full z-50 mt-2 w-56 overflow-hidden rounded-xl p-2"
                 >
                   <div className="mb-2 px-2 text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
                     Filters
@@ -213,7 +213,7 @@ export function Topbar({ onOpenPalette, onOpenSettings, onShowToast }: TopbarPro
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -8, scale: 0.96 }}
                   transition={{ type: "spring", stiffness: 300, damping: 28 }}
-                  className="glass-strong absolute right-0 top-full z-50 mt-2 w-56 overflow-hidden rounded-xl"
+                  className="glass-modal absolute right-0 top-full z-50 mt-2 w-56 overflow-hidden rounded-xl"
                 >
                   {/* Account info */}
                   <div className="border-b border-white/5 p-3">
