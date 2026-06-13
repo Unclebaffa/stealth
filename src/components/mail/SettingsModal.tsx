@@ -147,8 +147,13 @@ function AccountSettings() {
   );
 }
 
-function AppearanceSettings() {
-  const [theme, setTheme] = useState("dark");
+function AppearanceSettings({
+  preferences,
+  onChange,
+}: {
+  preferences: UiPreferences;
+  onChange: (preferences: UiPreferences) => void;
+}) {
   return (
     <div className="space-y-6">
       <div>
@@ -162,7 +167,7 @@ function AppearanceSettings() {
             {["dark", "light", "system"].map((t) => (
               <button
                 key={t}
-                onClick={() => setTheme(t)}
+                onClick={() => onChange({ ...preferences, theme: t as UiPreferences["theme"] })}
                 className={cn(
                   "rounded-lg border px-4 py-2 text-xs capitalize transition",
                   theme === t
