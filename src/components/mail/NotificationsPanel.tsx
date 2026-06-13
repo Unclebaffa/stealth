@@ -66,7 +66,7 @@ export function NotificationsPanel({
   onViewAll: () => void;
 }) {
   const [notifications, setNotifications] = useState(initialNotifications);
-  
+
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   const markAllRead = () => {
@@ -147,7 +147,7 @@ export function NotificationsPanel({
                       onClick={() => markAsRead(n.id)}
                       className={cn(
                         "flex w-full items-start gap-3 px-4 py-3 text-left transition hover:bg-white/[0.04]",
-                        !n.read && "bg-white/[0.02]"
+                        !n.read && "bg-white/[0.02]",
                       )}
                     >
                       <div className={cn(
