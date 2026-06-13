@@ -1,7 +1,17 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Archive, Inbox, Pencil, Search, Send, Settings, Star, type LucideIcon } from "lucide-react";
-import type { MailFolder } from "./data";
+import {
+  Archive,
+  Inbox,
+  Mail,
+  Pencil,
+  Search,
+  Send,
+  Settings,
+  Star,
+  type LucideIcon,
+} from "lucide-react";
+import type { Email, MailFolder } from "./data";
 
 type CommandItem = {
   icon: LucideIcon;

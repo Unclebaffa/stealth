@@ -163,6 +163,11 @@ export function EmailList({
                   >
                     {e.subject}
                   </div>
+                  {!compact && (
+                    <p className="mt-1 line-clamp-2 text-[10.5px] leading-4 text-muted-foreground/75">
+                      {e.preview}
+                    </p>
+                  )}
                 </div>
               </motion.button>
             </motion.li>
