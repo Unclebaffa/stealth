@@ -438,12 +438,14 @@ function Field({
 }) {
   return (
     <div className="flex items-center gap-3 border-b border-white/5 py-2">
-      <span className="w-16 shrink-0 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{label}</span>
-      <input 
+      <span className="w-16 shrink-0 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+        {label}
+      </span>
+      <input
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder} 
-        className="glow-ring w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground/70 focus:outline-none" 
+        placeholder={placeholder}
+        className="glow-ring w-full bg-transparent text-sm text-foreground placeholder:text-muted-foreground/70 focus:outline-none"
       />
     </div>
   );
