@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiV1ProtocolRouteImport } from './routes/api/v1/protocol'
 import { Route as ApiV1HealthRouteImport } from './routes/api/v1/health'
+import { Route as ApiV1PostageQuoteRouteImport } from './routes/api/v1/postage/quote'
 import { Route as ApiV1PoliciesEvaluateRouteImport } from './routes/api/v1/policies/evaluate'
 import { Route as ApiV1PoliciesOwnerRouteImport } from './routes/api/v1/policies/$owner'
 import { Route as ApiV1PoliciesOwnerSendersSenderRouteImport } from './routes/api/v1/policies/$owner/senders/$sender'
@@ -29,6 +30,11 @@ const ApiV1ProtocolRoute = ApiV1ProtocolRouteImport.update({
 const ApiV1HealthRoute = ApiV1HealthRouteImport.update({
   id: '/api/v1/health',
   path: '/api/v1/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiV1PostageQuoteRoute = ApiV1PostageQuoteRouteImport.update({
+  id: '/api/v1/postage/quote',
+  path: '/api/v1/postage/quote',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiV1PoliciesEvaluateRoute = ApiV1PoliciesEvaluateRouteImport.update({
@@ -54,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/api/v1/protocol': typeof ApiV1ProtocolRoute
   '/api/v1/policies/$owner': typeof ApiV1PoliciesOwnerRouteWithChildren
   '/api/v1/policies/evaluate': typeof ApiV1PoliciesEvaluateRoute
+  '/api/v1/postage/quote': typeof ApiV1PostageQuoteRoute
   '/api/v1/policies/$owner/senders/$sender': typeof ApiV1PoliciesOwnerSendersSenderRoute
 }
 export interface FileRoutesByTo {
@@ -62,6 +69,7 @@ export interface FileRoutesByTo {
   '/api/v1/protocol': typeof ApiV1ProtocolRoute
   '/api/v1/policies/$owner': typeof ApiV1PoliciesOwnerRouteWithChildren
   '/api/v1/policies/evaluate': typeof ApiV1PoliciesEvaluateRoute
+  '/api/v1/postage/quote': typeof ApiV1PostageQuoteRoute
   '/api/v1/policies/$owner/senders/$sender': typeof ApiV1PoliciesOwnerSendersSenderRoute
 }
 export interface FileRoutesById {
@@ -71,6 +79,7 @@ export interface FileRoutesById {
   '/api/v1/protocol': typeof ApiV1ProtocolRoute
   '/api/v1/policies/$owner': typeof ApiV1PoliciesOwnerRouteWithChildren
   '/api/v1/policies/evaluate': typeof ApiV1PoliciesEvaluateRoute
+  '/api/v1/postage/quote': typeof ApiV1PostageQuoteRoute
   '/api/v1/policies/$owner/senders/$sender': typeof ApiV1PoliciesOwnerSendersSenderRoute
 }
 export interface FileRouteTypes {
@@ -81,6 +90,7 @@ export interface FileRouteTypes {
     | '/api/v1/protocol'
     | '/api/v1/policies/$owner'
     | '/api/v1/policies/evaluate'
+    | '/api/v1/postage/quote'
     | '/api/v1/policies/$owner/senders/$sender'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -89,6 +99,7 @@ export interface FileRouteTypes {
     | '/api/v1/protocol'
     | '/api/v1/policies/$owner'
     | '/api/v1/policies/evaluate'
+    | '/api/v1/postage/quote'
     | '/api/v1/policies/$owner/senders/$sender'
   id:
     | '__root__'
@@ -97,6 +108,7 @@ export interface FileRouteTypes {
     | '/api/v1/protocol'
     | '/api/v1/policies/$owner'
     | '/api/v1/policies/evaluate'
+    | '/api/v1/postage/quote'
     | '/api/v1/policies/$owner/senders/$sender'
   fileRoutesById: FileRoutesById
 }
@@ -106,6 +118,7 @@ export interface RootRouteChildren {
   ApiV1ProtocolRoute: typeof ApiV1ProtocolRoute
   ApiV1PoliciesOwnerRoute: typeof ApiV1PoliciesOwnerRouteWithChildren
   ApiV1PoliciesEvaluateRoute: typeof ApiV1PoliciesEvaluateRoute
+  ApiV1PostageQuoteRoute: typeof ApiV1PostageQuoteRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -129,6 +142,13 @@ declare module '@tanstack/react-router' {
       path: '/api/v1/health'
       fullPath: '/api/v1/health'
       preLoaderRoute: typeof ApiV1HealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/postage/quote': {
+      id: '/api/v1/postage/quote'
+      path: '/api/v1/postage/quote'
+      fullPath: '/api/v1/postage/quote'
+      preLoaderRoute: typeof ApiV1PostageQuoteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/v1/policies/evaluate': {
@@ -172,6 +192,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiV1ProtocolRoute: ApiV1ProtocolRoute,
   ApiV1PoliciesOwnerRoute: ApiV1PoliciesOwnerRouteWithChildren,
   ApiV1PoliciesEvaluateRoute: ApiV1PoliciesEvaluateRoute,
+  ApiV1PostageQuoteRoute: ApiV1PostageQuoteRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
