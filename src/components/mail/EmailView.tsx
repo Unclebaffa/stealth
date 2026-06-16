@@ -18,14 +18,14 @@ import {
   Star,
   Table2,
   Trash2,
-  CheckCheck,
+  X,
   type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { EventMailCard, type CalendarEvent, type CalendarResponse } from "@/features/calendar";
 import { OTPCard, detectOtp } from "@/features/otp";
 import { ConvertSenderButton, SenderBadge } from "@/features/sender-conversion";
-import { SnoozeBanner } from "@/features/snooze";
+import { ProvenancePanel } from "./ProvenancePanel";
 import type { Email } from "./data";
 
 export type EmailViewActions = {
@@ -383,8 +383,9 @@ function ProtocolStatus({
   email: Email;
   onShowToast?: (message: string) => void;
 }) {
-  const verified = isVerified(email);
-  const proof = deriveProof(email);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const verified = ["verified", "priority", "encrypted", "receipts"].includes(email.folder);
+  const proof = `${email.id.padStart(2, "0")}c7...${email.from.length.toString(16)}a9`;
 
   return (
     <div className="mt-5 flex flex-wrap items-center gap-2 rounded-lg border border-white/[0.08] bg-black/15 px-3 py-2">
@@ -393,15 +394,70 @@ function ProtocolStatus({
         {verified ? "Stellar identity verified" : "Proof verification pending"}
       </span>
       <span className="font-mono text-[10px] text-muted-foreground">{proof}</span>
-      <button
-        onClick={async () => {
-          await navigator.clipboard?.writeText(proof);
-          onShowToast?.(`Proof ${proof} copied`);
-        }}
-        className="ml-auto rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-[10px] text-muted-foreground transition hover:text-foreground"
-      >
-        Copy proof
-      </button>
+      <div className="ml-auto flex items-center gap-2">
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-[10px] text-muted-foreground transition hover:text-foreground hover:bg-white/[0.08]"
+        >
+          Inspect provenance
+        </button>
+        <button
+          onClick={async () => {
+            await navigator.clipboard?.writeText(proof);
+            onShowToast?.(`Proof ${proof} copied`);
+          }}
+          className="rounded-md border border-white/10 bg-white/[0.04] px-2 py-1 text-[10px] text-muted-foreground transition hover:text-foreground hover:bg-white/[0.08]"
+        >
+          Copy proof
+        </button>
+      </div>
+
+      <AnimatePresence>
+        {isModalOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsModalOpen(false)}
+              className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 16 }}
+              transition={{ type: "spring", stiffness: 350, damping: 28 }}
+              className="glass-modal fixed left-1/2 top-1/2 z-[60] w-[min(460px,calc(100vw-2rem))] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl shadow-2xl p-5"
+            >
+              <div className="flex items-center justify-between border-b border-white/5 pb-3">
+                <div className="flex items-center gap-2">
+                  <BadgeCheck className="h-4 w-4 text-emerald-300" />
+                  <h3 className="text-sm font-semibold text-foreground">Message Provenance</h3>
+                </div>
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className="rounded-lg p-1.5 text-muted-foreground transition hover:bg-white/[0.06] hover:text-foreground"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+
+              <div className="mt-4">
+                <ProvenancePanel email={email} onShowToast={onShowToast} />
+              </div>
+
+              <div className="mt-5 flex justify-end">
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className="rounded-lg border border-white/10 bg-white/[0.03] px-4 py-2 text-xs font-semibold text-foreground transition hover:bg-white/[0.08] hover:border-white/20"
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

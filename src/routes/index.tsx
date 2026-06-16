@@ -397,6 +397,7 @@ function MailApp() {
               onSnooze={openSnooze}
               calendarEvents={calendar.visibleEvents}
               calendars={calendar.calendars}
+              onShowToast={showToast}
               onOpenCalendar={(eventId) => {
                 setCalendarEventId(eventId ?? null);
                 setCalendarOpen(true);

@@ -9,11 +9,13 @@ import {
   Send,
   Sparkles,
   User,
+  Shield,
   type LucideIcon,
 } from "lucide-react";
 import { format, isSameDay, parseISO } from "date-fns";
 import { getAppToday, type CalendarDefinition, type CalendarEvent } from "@/features/calendar";
 import { ConvertSenderButton, SenderBadge } from "@/features/sender-conversion";
+import { ProvenancePanel } from "./ProvenancePanel";
 import type { Email } from "./data";
 
 export type ContextAction = "snooze" | "translate" | "schedule" | "summarize";
@@ -28,6 +30,7 @@ export function RightPanel({
   calendars,
   onOpenCalendar,
   onCreateEvent,
+  onShowToast,
 }: {
   email: Email | null;
   onAction: (action: ContextAction, email: Email) => void;
@@ -38,6 +41,7 @@ export function RightPanel({
   calendars: CalendarDefinition[];
   onOpenCalendar: (eventId?: string) => void;
   onCreateEvent: () => void;
+  onShowToast?: (message: string) => void;
 }) {
   const [prompt, setPrompt] = useState("");
   const [summary, setSummary] = useState<string | null>(null);
@@ -179,6 +183,15 @@ export function RightPanel({
           </ul>
         </Card>
       ) : null}
+
+      {email && (
+        <Card>
+          <SectionHeader icon={Shield} title="Provenance" />
+          <div className="mt-3">
+            <ProvenancePanel email={email} onShowToast={onShowToast} />
+          </div>
+        </Card>
+      )}
 
       {email && (
         <Card>
