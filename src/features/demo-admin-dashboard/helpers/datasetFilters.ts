@@ -1,11 +1,5 @@
-import type {
-  Draft,
-  DraftFilters,
-} from "../types/draft";
-import type {
-  Persona,
-  PersonaFilters,
-} from "../types/persona";
+import type { Draft, DraftFilters } from "../types/draft";
+import type { Persona, PersonaFilters } from "../types/persona";
 
 /**
  * Helper functions for dataset search and filtering.
@@ -44,9 +38,7 @@ export function scoreDraftMatch(draft: Draft, query: string): number {
     score += 25;
   }
 
-  const matchingRecipients = draft.recipients.filter((recipient) =>
-    containsText(recipient, query)
-  );
+  const matchingRecipients = draft.recipients.filter((recipient) => containsText(recipient, query));
   score += matchingRecipients.length * 15;
 
   return score;
@@ -77,9 +69,9 @@ export function filterDrafts(drafts: Draft[], filters: DraftFilters): Draft[] {
 
   if (filters.recipient) {
     result = result.filter((draft) =>
-      draft.recipients.some((recipient) =>
-        normalizeQuery(recipient) === normalizeQuery(filters.recipient!)
-      )
+      draft.recipients.some(
+        (recipient) => normalizeQuery(recipient) === normalizeQuery(filters.recipient!),
+      ),
     );
   }
 
@@ -135,15 +127,15 @@ export function filterPersonas(personas: Persona[], filters: PersonaFilters): Pe
   }
 
   if (filters.email) {
-    result = result.filter((persona) =>
-      normalizeQuery(persona.email) === normalizeQuery(filters.email!)
+    result = result.filter(
+      (persona) => normalizeQuery(persona.email) === normalizeQuery(filters.email!),
     );
   }
 
   if (filters.stellarAddress) {
     result = result.filter(
       (persona) =>
-        normalizeQuery(persona.stellarAddress) === normalizeQuery(filters.stellarAddress!)
+        normalizeQuery(persona.stellarAddress) === normalizeQuery(filters.stellarAddress!),
     );
   }
 
