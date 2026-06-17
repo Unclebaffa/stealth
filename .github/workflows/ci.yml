@@ -24,6 +24,12 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: Check for stale contract bindings
+        run: |
+          node scripts/generate-contract-bindings.mjs
+          git diff --exit-code src/services/stellar/contracts/ || \
+            (echo "Contract bindings are stale. Run 'npm run generate:bindings' and commit the result." && exit 1)
+
       - name: Format Check
         run: bun x prettier --check .
 
