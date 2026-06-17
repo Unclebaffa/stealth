@@ -43,6 +43,8 @@ Use this checklist before merging any PR that adds or modifies demo data under
   helper output, or component render).
 - [ ] `npx vitest run src/features/demo-admin-dashboard` exits green locally.
 - [ ] No test uses `any` casts to bypass type checks on fixture data.
+- [ ] Campaign copy rules and internal note templates are documented in
+      `docs/CAMPAIGN_COPY_RULES.md`.
 
 ## 5. Types
 
