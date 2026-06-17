@@ -10,6 +10,8 @@ import {
   X,
   Paperclip,
   Calendar,
+  PieChart,
+  History,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type {
