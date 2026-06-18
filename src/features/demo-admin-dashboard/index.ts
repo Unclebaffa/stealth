@@ -14,6 +14,7 @@ export {
 } from "./fixtures/demoData";
 
 export { defaultCampaignSnapshots } from "./fixtures/campaignSnapshotFixtures";
+export { defaultCampaignTags } from "./fixtures/campaignTagFixtures";
 
 export type {
   AdminDashboardBreakpoint,
@@ -29,6 +30,7 @@ export type {
 } from "./types";
 
 export type { CampaignSnapshot } from "./types/campaignSnapshot";
+export type { CampaignTag, TagColorKey } from "./types/campaignTag";
 
 export {
   CAMPAIGN_STATUS_TOKENS,
@@ -37,6 +39,33 @@ export {
   getTagToken,
   getAudienceToken,
 } from "./constants/displayTokens";
+
+export { CampaignTagManager } from "./components/CampaignTagManager";
+
+export {
+  createTag,
+  renameTag,
+  updateTagColor,
+  mergeTag,
+  deleteTag,
+  getTagUsageCount,
+} from "./utils/tagOperations";
+
+export {
+  normalizeTagName,
+  toTagSlug,
+  resolveTagSlug,
+  normalizeTagColor,
+  assignTagOrders,
+  normalizeCampaignTag,
+  normalizeCampaignTags,
+} from "./utils/tagNormalization";
+
+export {
+  saveCampaignTags,
+  loadCampaignTags,
+  clearCampaignTags,
+} from "./persistence/localStorageAdapter";
 
 export {
   TemplatePicker,
@@ -51,8 +80,34 @@ export {
   type MessageTemplate,
   type TemplateCategory,
 } from "./templates";
+
 export * from "./validation-types";
 export * from "./validation";
 export * from "./validationFixtures";
 export { ValidationResultsPanel } from "./ValidationResultsPanel";
 export type { ValidationResultsPanelProps } from "./ValidationResultsPanel";
+
+export { AdminSearchBar } from "./AdminSearchBar";
+export type { AdminSearchBarProps } from "./AdminSearchBar";
+
+export { CampaignMessageAssignmentPanel } from "./components/CampaignMessageAssignmentPanel";
+export { MessagePicker } from "./components/MessagePicker";
+
+export type { AssignableMessage, AssignmentState } from "./types/assignment";
+
+export {
+  getAssignedMessages,
+  isMessageAssigned,
+  assignMessage,
+  unassignMessage,
+  getCampaignsForMessage,
+  assignToManyCampaigns,
+} from "./utils/assignmentHelpers";
+
+export {
+  saveAssignments,
+  loadAssignments,
+  clearAssignments,
+} from "./persistence/localStorageAdapter";
+
+export { messagePool, defaultAssignmentState } from "./fixtures/assignmentFixtures";
