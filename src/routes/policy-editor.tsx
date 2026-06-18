@@ -88,20 +88,21 @@ function PolicyEditorPage() {
                   <div>
                     <label className="font-medium text-sm">Allow Unknown Senders</label>
                     <p className="text-xs text-muted-foreground mt-1 max-w-[280px]">
-                      If disabled, only explicitly trusted contacts can reach you. All others are blocked.
+                      If disabled, only explicitly trusted contacts can reach you. All others are
+                      blocked.
                     </p>
                   </div>
                   <button
                     onClick={() => setAllowUnknown(!allowUnknown)}
                     className={cn(
                       "relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors",
-                      allowUnknown ? "bg-emerald-500" : "bg-white/20"
+                      allowUnknown ? "bg-emerald-500" : "bg-white/20",
                     )}
                   >
                     <span
                       className={cn(
                         "inline-block h-4 w-4 transform rounded-full bg-white transition-transform",
-                        allowUnknown ? "translate-x-6" : "translate-x-1"
+                        allowUnknown ? "translate-x-6" : "translate-x-1",
                       )}
                     />
                   </button>
@@ -111,7 +112,8 @@ function PolicyEditorPage() {
                   <div>
                     <label className="font-medium text-sm">Require Verification</label>
                     <p className="text-xs text-muted-foreground mt-1 max-w-[280px]">
-                      Unknown senders must prove their cryptographic identity. Unverified mail is rejected.
+                      Unknown senders must prove their cryptographic identity. Unverified mail is
+                      rejected.
                     </p>
                   </div>
                   <button
@@ -120,13 +122,13 @@ function PolicyEditorPage() {
                     className={cn(
                       "relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors",
                       requireVerified && allowUnknown ? "bg-emerald-500" : "bg-white/20",
-                      !allowUnknown && "opacity-50 cursor-not-allowed"
+                      !allowUnknown && "opacity-50 cursor-not-allowed",
                     )}
                   >
                     <span
                       className={cn(
                         "inline-block h-4 w-4 transform rounded-full bg-white transition-transform",
-                        requireVerified && allowUnknown ? "translate-x-6" : "translate-x-1"
+                        requireVerified && allowUnknown ? "translate-x-6" : "translate-x-1",
                       )}
                     />
                   </button>
@@ -150,7 +152,7 @@ function PolicyEditorPage() {
                     onChange={(e) => setMinimumPostage(parseFloat(e.target.value))}
                     className={cn(
                       "w-full accent-primary",
-                      !allowUnknown && "opacity-50 cursor-not-allowed"
+                      !allowUnknown && "opacity-50 cursor-not-allowed",
                     )}
                   />
                 </div>
