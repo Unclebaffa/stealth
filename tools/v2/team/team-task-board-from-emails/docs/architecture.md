@@ -1,6 +1,7 @@
 # Architecture Contract
 
 ## Overview
+
 This document defines the folder-local architecture for the "Team Task Board from Emails" tool. It establishes the internal module boundaries and integration constraints required to keep this tool as a self-contained mini-product before any future connection to the main application.
 
 ## Internal Module Boundaries
@@ -32,6 +33,7 @@ To maintain isolation, the tool must organize its code strictly within `tools/v2
 ## Integration Constraints
 
 Contributors must adhere to the following constraints:
+
 - **No Core App Modifications**: Do not touch files outside of `tools/v2/team/team-task-board-from-emails/`.
 - **Future Integration**: The tool must be designed so that a future integration issue can connect it to the main app by simply importing its top-level component or service and passing the required data/callbacks.
 - **Reviewability**: The entire module must remain small, reviewable, and fully functional using local fixtures without needing the main application running.
