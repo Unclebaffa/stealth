@@ -25,6 +25,7 @@ To maintain separation of concerns, the internal structure is strictly divided a
 ## Integration Constraints
 
 Contributors **MAY NOT** modify the following core systems:
+
 - The main application shell and dashboard layout.
 - The existing navigation or routing system.
 - Authentication or wallet core.
