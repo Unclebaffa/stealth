@@ -74,6 +74,7 @@ export type PresetId =
   | "proof-pending"
   | "paid-sender-request"
   | "receipt-settlement"
+  | "encrypted-provenance"
   | "encrypted-payload"
   | "conference-pass";
 
