@@ -1,56 +1,53 @@
+import type { ReactNode } from "react";
+import { cn } from "@/lib/utils";
+import { ADMIN_EMPTY_STATE_PRESETS } from "../constants/adminEmptyStates";
+
+export interface AdminEmptyStateProps {
+  /** Optional preset that supplies default title/description copy. */
+  kind?: keyof typeof ADMIN_EMPTY_STATE_PRESETS;
+  /** Heading. Falls back to the preset title when omitted. */
+  title?: string;
+  /** Supporting text. Falls back to the preset description when omitted. */
+  description?: string;
+  /** Optional leading icon or illustration. */
+  icon?: ReactNode;
+  /** Optional call-to-action slot rendered below the copy. */
+  action?: ReactNode;
+  /** Additional class names for the wrapper. */
+  className?: string;
+}
+
 /**
- * Preset copy for the demo admin dashboard empty states. Each entry is static,
- * fake, and safe for public review — no real user data, addresses, or secrets.
+ * Friendly, reusable empty state for the demo admin panels. Pass a `kind` to use
+ * the preset copy (messages, senders, attachments, events, validation), or
+ * provide your own title/description. The `action` prop is the CTA slot.
  */
-export type AdminEmptyStateKind = "messages" | "senders" | "attachments" | "events" | "validation";
+export function AdminEmptyState({
+  kind,
+  title,
+  description,
+  icon,
+  action,
+  className,
+}: AdminEmptyStateProps) {
+  const preset = kind ? ADMIN_EMPTY_STATE_PRESETS[kind] : undefined;
+  const resolvedTitle = title ?? preset?.title ?? "Nothing here yet";
+  const resolvedDescription = description ?? preset?.description;
 
-export interface AdminEmptyStateCopy {
-  /** Short, friendly heading. */
-  title: string;
-  /** One-line supporting description. */
-  description: string;
-  /** Suggested call-to-action label for the CTA slot (optional). */
-  ctaLabel?: string;
+  return (
+    <div
+      className={cn(
+        "flex flex-col items-center justify-center rounded-lg border border-dashed border-white/[0.08] bg-white/[0.02] px-6 py-10 text-center",
+        className,
+      )}
+      role="status"
+    >
+      {icon}
+      <p className="text-sm font-semibold text-foreground">{resolvedTitle}</p>
+      {resolvedDescription ? (
+        <p className="mt-1 max-w-sm text-xs text-muted-foreground">{resolvedDescription}</p>
+      ) : null}
+      {action}
+    </div>
+  );
 }
-
-export const ADMIN_EMPTY_STATE_PRESETS: Record<AdminEmptyStateKind, AdminEmptyStateCopy> = {
-  messages: {
-    title: "No messages yet",
-    description: "Demo messages will show here once the dataset loads.",
-    ctaLabel: "Add demo messages",
-  },
-  senders: {
-    title: "No senders yet",
-    description: "Add demo sender personas to preview sender details.",
-    ctaLabel: "Add demo senders",
-  },
-  attachments: {
-    title: "No attachments yet",
-    description: "Attachments from demo messages will be listed here.",
-    ctaLabel: "Add demo attachments",
-  },
-  events: {
-    title: "No events yet",
-    description: "Scheduled demo events will appear here when present.",
-    ctaLabel: "Add demo events",
-  },
-  validation: {
-    title: "No validation results yet",
-    description: "Run validation to see passes, warnings, and errors.",
-    ctaLabel: "Run validation",
-  },
-};
-
-/** Look up the preset copy for a given empty-state kind. */
-export function getAdminEmptyStatePreset(kind: AdminEmptyStateKind): AdminEmptyStateCopy {
-  return ADMIN_EMPTY_STATE_PRESETS[kind];
-}
-
-/** All supported empty-state kinds, in display order. */
-export const ADMIN_EMPTY_STATE_KINDS: AdminEmptyStateKind[] = [
-  "messages",
-  "senders",
-  "attachments",
-  "events",
-  "validation",
-];
