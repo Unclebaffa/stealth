@@ -268,3 +268,14 @@ export {
   getKpiMetricToken,
   getKpiStatusToken,
 } from "./constants/displayTokens";
+
+// Read receipt state controls (issue #182): states, option copy, and field component.
+export type { ReceiptState, ReceiptStateOption } from "./constants/receiptStates";
+export {
+  RECEIPT_STATES,
+  RECEIPT_STATE_OPTIONS,
+  DEFAULT_RECEIPT_STATE,
+  getReceiptStateOption,
+} from "./constants/receiptStates";
+export { ReceiptStateField } from "./components/ReceiptStateField";
+export type { ReceiptStateFieldProps } from "./components/ReceiptStateField";
