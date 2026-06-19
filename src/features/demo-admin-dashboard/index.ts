@@ -96,6 +96,18 @@ export {
   type TemplateCategory,
 } from "./templates";
 
+export type { CampaignSeedExample, CampaignSeedScenario } from "./types/campaignSeed";
+export {
+  campaignSeedExamples,
+  getCampaignSeedExamplesByCategory,
+  getCampaignSeedExamplesByTag,
+} from "./seed-data/campaignSeedExamples";
+export {
+  isSafeDemoRecipient,
+  toCampaignSeedSlug,
+  validateCampaignSeedScenario,
+} from "./seed-helpers/campaignSeed";
+
 export * from "./validation-types";
 export * from "./validation";
 export * from "./validationFixtures";
@@ -310,3 +322,13 @@ export {
 export { validateInboxSeedDataset } from "./seedDatasetValidation";
 export { getSeedDatasetPreview } from "./utils/seedDatasetPreview";
 export type { SeedDatasetPreview } from "./utils/seedDatasetPreview";
+  DEMO_FOLDERS,
+  MAILBOX_GROUPS,
+  FOLDER_DEFINITIONS,
+  DEFAULT_FOLDER,
+  getFolderDefinition,
+  getFoldersForGroup,
+} from "./constants/folderTaxonomy";
+export type { DemoFolder, MailboxGroup, FolderDefinition } from "./constants/folderTaxonomy";
+export { FolderTaxonomySelector } from "./components/FolderTaxonomySelector";
+export type { FolderTaxonomySelectorProps } from "./components/FolderTaxonomySelector";
