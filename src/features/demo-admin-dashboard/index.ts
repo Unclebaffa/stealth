@@ -245,12 +245,42 @@ export type { DraftDatasetExport } from "./types/datasetExport";
 export { ExportDatasetButton } from "./components/ExportDatasetButton";
 export type { ExportDatasetButtonProps } from "./components/ExportDatasetButton";
 
-// Admin empty states (issue #201): reusable component, preset copy, CTA slot.
-export { AdminEmptyState } from "./components/AdminEmptyState";
-export type { AdminEmptyStateProps } from "./components/AdminEmptyState";
+// Campaign KPI definitions (issue #262): types, fixtures, helpers, display tokens.
+export type {
+  CampaignKpiDefinition,
+  KpiMetricKind,
+  KpiStatus,
+  KpiTrend,
+  KpiUnit,
+} from "./types/campaignKpi";
+export { CAMPAIGN_KPI_DEFINITIONS } from "./fixtures/campaignKpiFixtures";
 export {
-  ADMIN_EMPTY_STATE_PRESETS,
-  ADMIN_EMPTY_STATE_KINDS,
-  getAdminEmptyStatePreset,
-} from "./constants/adminEmptyStates";
-export type { AdminEmptyStateCopy, AdminEmptyStateKind } from "./constants/adminEmptyStates";
+  computeKpiProgress,
+  getKpiById,
+  getKpisForCampaign,
+  isKpiMet,
+  sortKpisByMetric,
+  validateCampaignKpiDefinition,
+} from "./utils/campaignKpiHelpers";
+export {
+  KPI_METRIC_TOKENS,
+  KPI_STATUS_TOKENS,
+  getKpiMetricToken,
+  getKpiStatusToken,
+} from "./constants/displayTokens";
+
+export {
+  MESSAGE_FOLDERS,
+  DEFAULT_MESSAGE_FOLDER,
+  MESSAGE_FIELDS,
+  getMessageField,
+  createEmptyMessage,
+} from "./constants/messageListEditorModel";
+export type {
+  MessageFolder,
+  MessageFieldKey,
+  MessageFieldType,
+  EditableMessage,
+  MessageFieldMeta,
+} from "./constants/messageListEditorModel";
+export { messageListFixtures } from "./fixtures/messageListFixtures";
