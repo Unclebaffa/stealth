@@ -415,3 +415,17 @@ export {
 } from "./types/calendarEvent";
 export { calendarEventFixtures, defaultCalendarEvent } from "./fixtures/calendarEventFixtures";
 export { validateCalendarEventEditor } from "./calendarEventValidation";
+
+// Label manager (issue #185): types, helpers, fixtures, and UI.
+export type { DemoLabel, LabeledDemoMessage, LabelUsage } from "./labels/types";
+export {
+  addLabel,
+  countLabelUsage,
+  createLabel,
+  normalizeLabelName,
+  removeLabel,
+  toLabelId,
+  unusedLabels,
+} from "./labels/labelNormalization";
+export { demoLabels, labeledDemoMessages } from "./labels/labelFixtures";
+export { LabelManager } from "./labels/LabelManager";
