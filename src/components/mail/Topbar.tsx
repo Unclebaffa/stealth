@@ -94,7 +94,14 @@ export function Topbar({
   }, [notificationsOpen]);
 
   useEffect(() => {
-    const onResize = () => {
+    // Only subscribe to global scroll/resize while a dropdown is actually open.
+    // The scroll listener uses capture, so without this gate it would fire on
+    // every scroll anywhere in the app (e.g. the email list and reader panes)
+    // even when there is no open panel to reposition.
+    const anyOpen = filterOpen || accountOpen || helpOpen || notificationsOpen;
+    if (!anyOpen) return;
+
+    const onReposition = () => {
       if (filterOpen && filterRef.current) setFilterRect(filterRef.current.getBoundingClientRect());
       if (accountOpen && accountRef.current)
         setAccountRect(accountRef.current.getBoundingClientRect());
@@ -102,11 +109,11 @@ export function Topbar({
       if (notificationsOpen && notificationsRef.current)
         setNotifRect(notificationsRef.current.getBoundingClientRect());
     };
-    window.addEventListener("resize", onResize);
-    window.addEventListener("scroll", onResize, true);
+    window.addEventListener("resize", onReposition);
+    window.addEventListener("scroll", onReposition, true);
     return () => {
-      window.removeEventListener("resize", onResize);
-      window.removeEventListener("scroll", onResize, true);
+      window.removeEventListener("resize", onReposition);
+      window.removeEventListener("scroll", onReposition, true);
     };
   }, [filterOpen, accountOpen, helpOpen, notificationsOpen]);
 
